@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="znicrmSCFlag" content="SomeValue">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example Page</title>
+</head>
+<body>
+<script>
+(function(z, n, i, c, r, m){
+    // Define zipcall function
+    zipcall = z;
+    zc = function(k,v){
+        if( typeof zca === 'undefined' || !zca instanceof Array ){ 
+            zca = []; 
+        }
+        zca[k] = v;
+    };
+    zc('ak',r);
+    
+    // Create and insert the script element for the chat widget
+    a = n.createElement(i);
+    j = n.getElementsByTagName(i).length;
+    k = n.getElementsByTagName(i)[j-1];
+    a.defer = 1;
+    a.src = c;
+    k.parentNode.insertBefore(a, k);
+    
+    // Add custom CSS to ensure proper display and prevent conflicts
+    var css = `
+        #zcScrMissing {
+            z-index: 9999 !important;
+            background-color: red !important;
+            color: white !important;
+            padding: 10px !important;
+            left: 10px !important;
+            bottom: 50px !important;
+            position: fixed !important;
+            display: block !important;
+        }
+        .znicrm-chat-container {
+            position: relative !important;
+            z-index: 9999 !important;
+            display: block !important;
+        }
+        .znicrm-chat-container * {
+            overflow: visible !important;
+        }
+    `;
+    
+    // Create a style element and append the CSS
+    var style = document.createElement('style');
+    style.type = 'text/css';
+    if (style.styleSheet){
+        style.styleSheet.cssText = css;
+    } else {
+        style.appendChild(document.createTextNode(css));
+    }
+    document.getElementsByTagName('head')[0].appendChild(style);
+    
+    // Check for meta tag and display error if missing
+    const d = new Date();
+    let mid = 'zcScrMissing' + d.getTime();
+    const v = setInterval(function() { 
+        if(n.querySelector('meta[name="'+ m +'"]') == null){
+            ab = document.createElement("div");
+            ab.id = mid;
+            ab.style="display:block;z-index:9999;background-color:red;color:white;padding:10px;left:10px;bottom:50px;position:fixed";
+            document.body.appendChild(ab);
+            n.getElementById(mid).innerHTML = ("We are unable to load special offers for you. Please refresh the page.");
+        } else {
+            if(n.querySelector('#'+mid) != null){
+                n.getElementById(mid).remove(); 
+            }
+            clearInterval(v);
+        }
+    }, 10000);
+})(window, document, 'script', 'https://engage.znicrm.com/engage.js', 'E620AFE24F7D4016A6935C2AE8A7E714','znicrmSCFlag');
+</script>
+
+
+ 
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+ 
+
+
+<!-- 
+
+If you choose footer.php, scroll down to the bottom just before the closing </body> tag.
+Paste your script code there:
+html
+Copy code
+<script>
+(function(z, n, i, c, r, m){
+    zipcall = z;
+    zc = function(k,v){
+        if( typeof zca === 'undefined' || !zca instanceof Array ){ 
+            zca = []; 
+        }
+        zca[k] = v;
+    };
+    zc('ak',r);
+    a = n.createElement(i);
+    j = n.getElementsByTagName(i).length;
+    k = n.getElementsByTagName(i)[j-1];
+    a.defer = 1;
+    a.src = c;
+    k.parentNode.insertBefore(a, k);
+    
+    const d = new Date();
+    let mid = 'zcScrMissing' + d.getTime();
+    const v = setInterval(function() { 
+        if(n.querySelector('meta[name="'+ m +'"]') == null){
+            ab = document.createElement("div");
+            ab.id = mid;
+            ab.style="display:block;z-index:9999;background-color:red;color:white;padding:10px;left:10px;bottom:10px;position:fixed";
+            document.body.appendChild(ab);
+            n.getElementById(mid).innerHTML = ("We are unable to load special offers for you. Please refresh the page.");
+        } else {
+            if(n.querySelector('#'+mid) != null){
+                n.getElementById(mid).remove(); 
+            }
+            clearInterval(v);
+        }
+    }, 10000);
+})(window, document, 'script', 'https://engage.znicrm.com/engage.js', 'E620AFE24F7D4016A6935C2AE8A7E714','znicrmSCFlag');
+</script> -->
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom OAuth</title>
+    <script>
+        function getAccessToken() {
+            const authorizationCode = document.getElementById('authorization_code').value;
+            const clientId = '3QZeeaKbSDmiyOvK1OnLBw';
+            const clientSecret = '2bSQRHay4US4m6pz1GyhNmQrw2LO5gDl';
+            const redirectUri = 'http://localhost/server/moodle/admin/oauth2callback.php';
+
+            fetch('https://zoom.us/oauth/token', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret),
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'grant_type': 'authorization_code',
+                    'code': authorizationCode,
+                    'redirect_uri': redirectUri
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Access Token:', data.access_token);
+                // Handle the access token, e.g., display it or store it
+                document.getElementById('access_token').textContent = data.access_token;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Zoom OAuth Token Exchange</h1>
+    <form onsubmit="event.preventDefault(); getAccessToken();">
+        <label for="authorization_code">Authorization Code:</label>
+        <input type="text" id="authorization_code" name="authorization_code" required>
+        <button type="submit">Get Access Token</button>
+    </form>
+    <div>
+        <h2>Access Token:</h2>
+        <p id="access_token"></p>
+    </div>
+</body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reCAPTCHA Test</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+
+    <h2>reCAPTCHA Test Form</h2>
+    <form>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br><br>
+        
+      
+        <div class="g-recaptcha" data-sitekey="6LdKXSEqAAAAAMb11cXR5HgxFbzjpfnexDMkdrAQ"></div>
+        <br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+</html> -->

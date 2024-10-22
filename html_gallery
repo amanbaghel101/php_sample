@@ -1,0 +1,133 @@
+<div class="unique-gallery-section">
+    <style>
+        .unique-gallery-section {
+            padding: 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+
+        .unique-gallery-container {
+            max-width: 100%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .unique-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns for desktop */
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* For any screen size below desktop, show 2 columns */
+        @media (max-width: 1024px) {
+            .unique-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .unique-gallery-image {
+            width: 100%;
+            height: 200px !important;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .unique-gallery-image:hover {
+            transform: scale(1.05);
+        }
+
+        .unique-load-more {
+            display: block;
+            margin: auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .unique-load-more:hover {
+            background-color: #0056b3;
+        }
+
+        .unique-back-to-top {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .unique-back-to-top:hover {
+            background-color: #218838;
+        }
+    </style>
+    <div class="unique-gallery-container">
+        <div class="unique-gallery" id="unique-gallery">
+            <img src="https://growthsource.in/wp-content/mystaging01/wp-content/uploads/2024/10/20240419_131849914_iOS-scaled.jpg" class="unique-gallery-image">
+            <img src="https://growthsource.in/wp-content/mystaging01/wp-content/uploads/2024/10/20240420_055705830_iOS-scaled.jpg" class="unique-gallery-image">
+            <img src="https://growthsource.in/wp-content/mystaging01/wp-content/uploads/2024/10/IMG20240419201815-scaled.jpg" class="unique-gallery-image">
+        </div>
+        <button id="unique-load-more" class="unique-load-more">Load More</button>
+        <button id="unique-back-to-top" class="unique-back-to-top">Back to Top</button>
+    </div>
+
+    <script>
+        const uniqueImages = [
+            'https://growthsource.in/wp-content/mystaging01/wp-content/uploads/2024/10/IMG-20240419-WA0003.jpg" class="unique-gallery-image',
+            'https://growthsource.in/wp-content/mystaging01/wp-content/uploads/2024/10/IMG20240419151309-scaled.jpg',
+            'https://growthsource.in/wp-content/mystaging01/wp-content/uploads/2024/10/20240420_090859311_iOS-scaled.jpg',
+            'https://growthsource.in/wp-content/mystaging01/wp-content/uploads/2024/09/Media-1.jpg',
+            'https://growthsource.in/wp-content/mystaging01/wp-content/uploads/2024/10/20240420_090859311_iOS-scaled.jpg',
+            'https://growthsource.in/wp-content/mystaging01/wp-content/uploads/2024/10/IMG20240419151315-scaled.jpg',
+            'https://growthsource.in/wp-content/mystaging01/wp-content/uploads/2024/10/20240419_115643724_iOS-scaled.jpg',
+            'https://growthsource.in/wp-content/mystaging01/wp-content/uploads/2024/10/20240419_094535000_iOS-scaled.jpg',
+            'https://growthsource.in/wp-content/mystaging01/wp-content/uploads/2024/10/2023-07-14.jpg',
+            'https://growthsource.in/wp-content/mystaging01/wp-content/uploads/2024/10/Media.jpg',
+            'https://growthsource.in/wp-content/mystaging01/wp-content/uploads/2024/09/IMG_2120-scaled.jpg',
+            'https://growthsource.in/wp-content/mystaging01/wp-content/uploads/2024/10/WhatsApp-Image-2024-10-18-at-17.09.26.jpeg'
+        ];
+
+        let uniqueCurrentIndex = 3;
+
+        document.getElementById('unique-load-more').addEventListener('click', () => {
+            const gallery = document.getElementById('unique-gallery');
+            
+            for (let i = 0; i < 3 && uniqueCurrentIndex < uniqueImages.length; i++, uniqueCurrentIndex++) {
+                const img = document.createElement('img');
+                img.src = uniqueImages[uniqueCurrentIndex];
+                img.alt = `Image ${uniqueCurrentIndex + 1}`;
+                img.className = 'unique-gallery-image';
+                gallery.appendChild(img);
+            }
+
+            if (uniqueCurrentIndex >= uniqueImages.length) {
+                document.getElementById('unique-load-more').style.display = 'none';
+                document.getElementById('unique-back-to-top').style.display = 'block'; // Show back to top button
+            }
+        });
+
+        document.getElementById('unique-back-to-top').addEventListener('click', () => {
+            uniqueCurrentIndex = 3; // Reset index
+            const gallery = document.getElementById('unique-gallery');
+            gallery.innerHTML = ''; // Clear the gallery
+
+            // Add first 4 images back
+            for (let i = 0; i < 3; i++) {
+                const img = document.createElement('img');
+                img.src = uniqueImages[i];
+                img.alt = `Image ${i + 1}`;
+                img.className = 'unique-gallery-image';
+                gallery.appendChild(img);
+            }
+
+            document.getElementById('unique-load-more').style.display = 'block'; // Show load more button
+            document.getElementById('unique-back-to-top').style.display = 'none'; // Hide back to top button
+        });
+    </script>
+</div>
